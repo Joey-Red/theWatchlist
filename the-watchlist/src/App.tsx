@@ -12,6 +12,12 @@ import MemberList from "./components/MemberList";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import DisplayData from "./components/DisplayData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faGithub,
+    faLinkedin,
+    faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 function App() {
     // Displaying components
     let [mainContent, setMainContent] = useState(true);
@@ -60,6 +66,7 @@ function App() {
         }
         // console.log(user);
     }, []);
+
     return (
         <div className="bg-stone-100 flex lg:justify-center">
             {displayData && (
@@ -100,8 +107,8 @@ function App() {
                     setUser={setUser}
                 />
             )}
-            <div className="flex w-screen max-w-screen-lg  bg-slate-50  ">
-                <div className="h-screen ml-1">
+            <div className="flex w-screen max-w-screen-lg h-screen bg-slate-50">
+                <div className="">
                     {sidebar && (
                         <Sidebar
                             setUser={setUser}
@@ -120,7 +127,7 @@ function App() {
                         />
                     )}
                 </div>
-                <div className="flex flex-col w-full h-screen">
+                <div className="flex flex-col w-full">
                     <Search
                         setTitle={setTitle}
                         setLoading={setLoading}
@@ -153,10 +160,54 @@ function App() {
                     />{" "}
                     {/* Always Active */}
                     {mainContent && (
-                        <>
+                        <div
+                        // className="overflow-hidden"
+                        // style={{ height: "calc(100vh - 110px)" }} - works except sm
+                        // style={{ height: "calc(100vh - 110px)" }}
+                        >
                             <MainContent />
                             <SecondaryContent />
-                        </>
+                            <div className="bg-slate-900/90 p-2 text-white text-lg flex justify-around">
+                                <p>TheWatchlist, Rate. Comment. Share!</p>
+                                <p className="flex gap-4">
+                                    <a
+                                        href="https://github.com/Joey-Red"
+                                        target="blank"
+                                    >
+                                        <div className="hover:text-[#242930]">
+                                            <FontAwesomeIcon
+                                                icon={faGithub}
+                                                size="lg"
+                                            />
+                                        </div>
+                                    </a>
+
+                                    <a
+                                        href="https://www.linkedin.com/in/joey-dalrymple/"
+                                        target="blank"
+                                    >
+                                        <div className="hover:text-[#0A66C2]">
+                                            <FontAwesomeIcon
+                                                icon={faLinkedin}
+                                                size="lg"
+                                            />
+                                        </div>
+                                    </a>
+
+                                    <a
+                                        href="https://twitter.com/JoeyDalrymple_"
+                                        target="blank"
+                                    >
+                                        <div className="hover:text-[#1E9BF0]">
+                                            <FontAwesomeIcon
+                                                icon={faTwitter}
+                                                size="lg"
+                                            />
+                                        </div>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                     )}
                     {myList && <Mylist user={user} />}
                     {otherList && <Otherlist />}

@@ -16,7 +16,7 @@ function ArticleContainer({
     imageUrl,
 }: ArticleData) {
     return (
-        <div className="my-2 p-2 bg-black/90 rounded">
+        <div className="my-2 p-2 bg-black/90 rounded" key={readMoreUrl}>
             <p className="bg-slate-900/30 text-white">{title}</p>
             <a href={readMoreUrl}>
                 <img

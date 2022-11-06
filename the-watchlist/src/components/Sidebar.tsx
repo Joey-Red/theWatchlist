@@ -83,8 +83,16 @@ function Sidebar({
     // const showSidebar = () => {
     //     setSidebar(true);
     // };
+    // let sidebarContainer = document.getElementById("sidebar");
+    let closeSidebar = () => {
+        setSidebar(false);
+        // sidebarContainer?.classList.add("hidden");
+    };
     return (
-        <div className="flex flex-col h-full px-1 pr-0">
+        <div
+            className="flex flex-col h-full px-1 fixed z-50 bg-stone-100"
+            id="sidebar"
+        >
             {/* justify-between py-4 */}
             <div className="pb-4 pt-3 px-0 justify-center flex">
                 {" "}
@@ -96,7 +104,7 @@ function Sidebar({
                 {sidebar && (
                     <div className="py-4 px-0 justify-center flex">
                         <div
-                            onClick={() => setSidebar(false)}
+                            onClick={closeSidebar}
                             className="flex text-md p-3 bg-white rounded-full hover:bg-neutral-900 hover:text-white"
                         >
                             <FontAwesomeIcon icon={faArrowLeft} size="lg" />
@@ -153,7 +161,6 @@ function Sidebar({
                                 <FontAwesomeIcon
                                     icon={faArrowRightFromBracket}
                                     size="xl"
-                                    style={{ transform: "scale(-1, 1)" }}
                                 />
                             </button>
                         )}

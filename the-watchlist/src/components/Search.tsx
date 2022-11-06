@@ -71,8 +71,10 @@ function Search({
     setDisabledSearch,
 }: SearchProps) {
     let [currSearch, setCurrSearch] = useState("");
+    // let sidebarContainer = document.getElementById("sidebar");
     const showSidebar = () => {
         setSidebar(true);
+        // sidebarContainer?.classList.remove("hidden");
     };
     let handleLogIn = () => {
         setShowLogIn(true);

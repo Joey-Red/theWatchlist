@@ -37,7 +37,7 @@ router.post("/ratings", (req, res, next) => {
     );
 });
 router.put("/update-rating", (req, res, next) => {
-    console.log(req.body);
+    // console.log(req.body);
     MovieComment.findOneAndUpdate(
         { _id: req.body.id },
         { userRating: req.body.rating },
@@ -84,6 +84,7 @@ router.post("/movie-comment", (req, res, next) => {
         planSee: req.body.planSee,
         comment: req.body.comment,
         userRating: req.body.userRating,
+        moviePoster: req.body.moviePoster,
         dateAdded: new Date(),
     }).save((err) => {
         if (err) {
@@ -99,6 +100,18 @@ router.get("/user-list", (req, res) => {
         }
         res.json(result);
     });
+});
+router.get("/trending", (req, res) => {
+    // MovieComment.find({ $query: {}, $orderby: { $dateAdded: -1 } }).limit(3),
+    MovieComment.find({})
+        .sort({ $natural: -1 })
+        .limit(3)
+        .exec(function (err, result) {
+            if (err) {
+                res.json(err);
+            }
+            res.json(result);
+        });
 });
 router.post("/my-list", (req, res) => {
     User.findOne({ _id: req.body.user._id }, (err, result) => {

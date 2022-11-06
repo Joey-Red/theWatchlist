@@ -107,6 +107,7 @@ function DisplayData({
                     seen: seen,
                     planSee: planSee,
                     userRating: userRating,
+                    moviePoster: poster,
                     comment: comment,
                 }),
             ]).then(
@@ -122,6 +123,7 @@ function DisplayData({
                 movieName: title,
                 seen: seen,
                 planSee: planSee,
+                moviePoster: poster,
                 comment: comment,
             });
         }
