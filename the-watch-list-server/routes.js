@@ -113,6 +113,63 @@ router.get("/trending", (req, res) => {
             res.json(result);
         });
 });
+router.get("/rankings", (req, res) => {
+    MovieComment.find({}, (err, result) => {
+        if (err) {
+            res.json(err);
+        }
+        let comparisonArr = [];
+        let tallyArray = [];
+        let avgArray = [];
+        result.forEach((film) => {
+            // console.log("resForEach: ", film);
+            comparisonArr.push({
+                movieName: film.movieName,
+                movieRating: film.userRating,
+                totalCount: 1,
+                poster: film.moviePoster,
+            });
+        });
+        // Sort Movies and add up scores
+        const reducer = comparisonArr.reduce((acc, curr) => {
+            const index = acc.findIndex(
+                (item) => item.movieName === curr.movieName
+            );
+            // Check to see if a dupe exists
+            index > -1
+                ? // true or false
+                  (acc[index].movieRating +=
+                      curr.movieRating &&
+                      (acc[index].totalCount += curr.totalCount))
+                : //   console.log(acc[index].totalCount + curr.totalCount))
+                  // if true, add it up, if false, push it in
+                  //   console.log("acc: ", acc);
+                  acc.push({
+                      movieName: curr.movieName,
+                      movieRating: curr.movieRating,
+                      totalCount: curr.totalCount,
+                      poster: curr.poster,
+                  });
+            acc = tallyArray;
+            return acc;
+        }, []);
+        tallyArray.forEach((film) => {
+            // console.log("top3: ", film);
+            avgArray.push({
+                // name: film.movieName,
+                // avgRating: film.movieRating / film.totalCount,
+                // poster: film.poster,
+                film,
+            });
+        });
+        let sortArray = avgArray.sort((a, b) =>
+            a.avgRating > b.avgRating ? -1 : 1
+        );
+        let topThree = sortArray.slice(0, 3);
+        // console.log(sortArray);
+        res.json(topThree);
+    });
+});
 router.post("/my-list", (req, res) => {
     User.findOne({ _id: req.body.user._id }, (err, result) => {
         if (err) {

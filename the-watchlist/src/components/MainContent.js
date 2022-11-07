@@ -16,7 +16,7 @@ function MainContent() {
     let [contentTwo, setContentTwo] = useState();
     let [contentThree, setContentThree] = useState();
     // Check Screen size so that our interval can stop if were not in lg mode
-    let [currSize, setCurrSize] = useState("lg");
+    let [currSize, setCurrSize] = useState("sm");
 
     useEffect(() => {
         if (currSize === "sm") {
@@ -25,7 +25,7 @@ function MainContent() {
             }, 5000);
             return () => clearInterval(interval);
         }
-    }, [index]);
+    }, [index, currSize]);
 
     useEffect(() => {
         function handleResize() {
@@ -79,24 +79,24 @@ function MainContent() {
             <div className="rounded-tr rounded-tl flex bg-slate-900/90 text-white py-2 min-w-full max-w-full absolute hidden sm:flex">
                 <p className="min-w-fit px-2"> Trending on The Watchlist</p>
             </div>
-            {currSize === "lg" && !loading && (
+            {!loading && (
                 <div className="h-full flex max-h-[540px] sm:mt-10 bg-stone-50 gap-2 md:flex hidden">
                     <TrendingSm content={contentOne} />
                     <TrendingSm content={contentTwo} />
                     <TrendingSm content={contentThree} />
                 </div>
             )}
-            {currSize === "md" && !loading && (
+            {!loading && (
                 <div className="h-full flex sm:mt-10 max-h-[540px]  bg-stone-50 gap-2 sm:flex hidden md:hidden">
                     <TrendingMd content={contentOne} />
                     <TrendingMd content={contentTwo} />
                 </div>
             )}
-            {currSize === "sm" && !loading && (
+            {!loading && (
                 <div className="h-full flex sm:mt-10 max-h-[540px]  bg-stone-50 gap-2 sm:hidden">
                     <button
                         onClick={() => changeCount(-1)}
-                        className="z-40 hover:bg-white hover:text-black text-white absolute left-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tl rounded-bl"
+                        className="z-20 hover:bg-white hover:text-black text-white absolute left-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tl rounded-bl"
                     >
                         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                     </button>
@@ -113,7 +113,7 @@ function MainContent() {
                     )}
                     <button
                         onClick={() => changeCount(1)}
-                        className="z-40 hover:bg-white hover:text-black text-white absolute right-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tr rounded-br"
+                        className="z-20 hover:bg-white hover:text-black text-white absolute right-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tr rounded-br"
                     >
                         <FontAwesomeIcon icon={faArrowAltCircleRight} />
                     </button>

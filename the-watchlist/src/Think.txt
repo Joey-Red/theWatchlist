@@ -1,0 +1,47 @@
+let arr = [
+    {name: 'a', score: 7},
+    {name: 'b', score: 1},
+    {name: 'a', score: 7},
+    {name: 'b', score: 10},
+    {name: 'c', score: 2},
+    {name: 'b', score: 8},
+    {name: 'c', score: 4},
+    {name: 'a', score: 3}
+    ]
+
+    // Result I want 
+    let sortedArr = [
+        {name: 'a', score: 17},
+        {name: 'b', score: 19},
+        {name: 'c', score: 6}
+        ]
+
+
+         // Sort Movies and add up scores
+        const result = comparisonArr.reduce((acc: any, curr: any) => {
+            const index = acc.findIndex(
+                (item: any) => item.movieName === curr.movieName
+            );
+            index > -1
+                ? (acc[index].movieRating += curr.movieRating)
+                : acc.push({
+                      movieName: curr.movieName,
+                      movieRating: curr.movieRating,
+                  });
+            return acc;
+        }, []);
+
+
+
+
+{'a', 3}                               {movieName: 'a', rating: 23}
+if name === movieName {
+    rating/arr[index][1]
+    //If names are the same, divide the rating by the count at that index, the second value
+}
+
+
+
+
+
+        

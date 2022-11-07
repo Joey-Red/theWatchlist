@@ -16,8 +16,8 @@ function ArticleContainer({
     imageUrl,
 }: ArticleData) {
     return (
-        <div className="my-2 p-2 bg-black/90 rounded" key={readMoreUrl}>
-            <p className="bg-slate-900/30 text-white">{title}</p>
+        <div className="my-2 p-2 bg-slate-900/90 rounded" key={readMoreUrl}>
+            <p className="text-white">{title}</p>
             <a href={readMoreUrl}>
                 <img
                     src={imageUrl}
@@ -26,7 +26,7 @@ function ArticleContainer({
                 />
             </a>
             <p className="text-white">{content}</p>
-            <div className="flex justify-center gap-4 bg-white/20">
+            <div className="flex justify-center gap-4 bg-white/20 rounded">
                 <p className="text-white">{author}</p>
                 <a href={readMoreUrl} className="text-white underline">
                     Read More

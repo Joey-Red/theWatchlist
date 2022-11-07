@@ -66,9 +66,15 @@ function App() {
         }
         // console.log(user);
     }, []);
-
+    let hideOverflow = {
+        overflow: "hidden",
+    };
+    let showOverflow = {};
     return (
-        <div className="bg-stone-100 flex lg:justify-center">
+        <div
+            className="bg-stone-100 flex justify-center w-full"
+            style={displayData ? hideOverflow : showOverflow}
+        >
             {displayData && (
                 <DisplayData
                     title={title}
@@ -108,7 +114,7 @@ function App() {
                 />
             )}
             <div className="flex w-screen max-w-screen-lg h-screen bg-slate-50">
-                <div className="">
+                <aside>
                     {sidebar && (
                         <Sidebar
                             setUser={setUser}
@@ -126,7 +132,7 @@ function App() {
                             setShowRegister={setShowRegister}
                         />
                     )}
-                </div>
+                </aside>
                 <div className="flex flex-col w-full">
                     <Search
                         setTitle={setTitle}
@@ -167,45 +173,48 @@ function App() {
                         >
                             <MainContent />
                             <SecondaryContent />
-                            <div className="bg-slate-900/90 p-2 text-white text-lg flex justify-around">
-                                <p>TheWatchlist, Rate. Comment. Share!</p>
-                                <p className="flex gap-4">
-                                    <a
-                                        href="https://github.com/Joey-Red"
-                                        target="blank"
-                                    >
-                                        <div className="hover:text-[#242930]">
+                            <div className="m-2 bg-slate-900/90 p-4 text-white text-xl flex justify-evenly">
+                                <div className="w-[50%] text-center flex justify-center my-auto">
+                                    TheWatchlist, Rate. Comment. Share!
+                                </div>
+
+                                <div className="flex w-[50%] justify-evenly ">
+                                    <div className="flex justify-center hover:bg-white rounded-full p-2 hover:text-[#242930] flex mx-auto">
+                                        <a
+                                            href="https://github.com/Joey-Red"
+                                            target="blank"
+                                            className="flex justify-center"
+                                        >
                                             <FontAwesomeIcon
                                                 icon={faGithub}
                                                 size="lg"
+                                                className="flex justify-center"
                                             />
-                                        </div>
-                                    </a>
-
-                                    <a
-                                        href="https://www.linkedin.com/in/joey-dalrymple/"
-                                        target="blank"
-                                    >
-                                        <div className="hover:text-[#0A66C2]">
+                                        </a>
+                                    </div>
+                                    <div className="hover:scale-125 hover:text-[#0A66C2] p-2 flex justify-center align-center my-auto mx-auto">
+                                        <a
+                                            href="https://www.linkedin.com/in/joey-dalrymple/"
+                                            target="blank"
+                                        >
                                             <FontAwesomeIcon
                                                 icon={faLinkedin}
                                                 size="lg"
                                             />
-                                        </div>
-                                    </a>
-
-                                    <a
-                                        href="https://twitter.com/JoeyDalrymple_"
-                                        target="blank"
-                                    >
-                                        <div className="hover:text-[#1E9BF0]">
+                                        </a>
+                                    </div>
+                                    <div className="hover:scale-125 hover:text-[#1E9BF0] p-2 flex justify-center align-center my-auto mx-auto">
+                                        <a
+                                            href="https://twitter.com/JoeyDalrymple_"
+                                            target="blank"
+                                        >
                                             <FontAwesomeIcon
                                                 icon={faTwitter}
                                                 size="lg"
                                             />
-                                        </div>
-                                    </a>
-                                </p>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     )}

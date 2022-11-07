@@ -148,7 +148,7 @@ function DisplayData({
         setDisabledSearch(false);
     };
     return (
-        <div className="bg-slate-900/40 absolute bottom-0 top-0 left-0 right-0 z-20 flex items-center justify-center">
+        <div className="bg-slate-900/40 absolute bottom-0 top-0 left-0 right-0 z-40 flex items-center justify-center">
             <div
                 ref={wrapperRef}
                 className="z-40 h-3/4 w-full max-w-screen-lg rounded border border-black absolute   overflow-y-scroll"

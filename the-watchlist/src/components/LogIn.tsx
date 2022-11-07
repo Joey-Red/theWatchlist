@@ -69,7 +69,7 @@ function LogIn({
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef);
     return (
-        <div className="bg-slate-900/40 absolute top-0 bottom-0 left-0 right-0 z-20 flex items-center justify-center">
+        <div className="bg-slate-900/40 absolute top-0 bottom-0 left-0 right-0 z-40 flex items-center justify-center">
             {/* max-w-screen-lg */}
             {/* h-1/2 top-1/4 absolute left-1/4 right-1/4 */}
             <div

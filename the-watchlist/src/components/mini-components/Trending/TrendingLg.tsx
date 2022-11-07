@@ -21,11 +21,11 @@ function TrendingLg({ content }: trendingLgProps) {
         >
             <div
                 style={opaque ? opaqueStyle : none}
-                className="rounded-br rounded-bl pointer-events-none absolute top-0 bottom-0 left-0 right-0 bg-neutral-900/80"
+                className="rounded pointer-events-none absolute top-0 bottom-0 left-0 right-0 bg-neutral-900/80"
             ></div>
             <div className="z-20 text-white p-2 flex justify-between flex-col h-full">
                 <p className="text-lg text-center">{content.movieName}</p>
-                <div>
+                <div className="text-center text-xl">
                     <p>Score: {content.userRating}/10</p>
                     <p>{content.postUser}</p>
                     {content.comment && content.comment !== "" && (
