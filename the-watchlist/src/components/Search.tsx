@@ -38,6 +38,7 @@ interface SearchProps {
     setRunTime: Function;
     disabledSearch: any;
     setDisabledSearch: Function;
+    setUser: Function;
 }
 
 function Search({
@@ -45,6 +46,7 @@ function Search({
     setSidebar,
     sidebar,
     loggedIn,
+    setUser,
     setLoggedIn,
     showLogIn,
     setShowLogIn,
@@ -87,6 +89,7 @@ function Search({
         }
         setDisabledSearch(true);
         setDisplayData(true);
+        setSidebar(false);
         Axios.post(
             `http://www.omdbapi.com/?apikey=f8c753b6&t=${currSearch}&plot=full`
         )
@@ -106,7 +109,7 @@ function Search({
                     setTitle(res.data.Title);
                     setRunTime(res.data.Runtime);
                     setLoading(false);
-                    console.log(res);
+                    // console.log(res);
                 }
             })
             .catch(function (error: AxiosError | string | object | any) {
@@ -121,6 +124,31 @@ function Search({
             });
     };
 
+    const handleLoginGuest = () => {
+        Axios.post("http://localhost:8080/log-in", {
+            username: "Guest",
+            password: "123456",
+        })
+            .then((res: any) => {
+                if (res.status === 200) {
+                    setLoggedIn(true);
+                    setUser(res.data);
+                    // store the user in localStorage
+                    let stringData = JSON.stringify(res.data);
+                    localStorage.setItem("user", stringData);
+                    setShowLogIn(false);
+                }
+            })
+            .catch(function (error: AxiosError | string | object | any) {
+                if (
+                    error.response.status === 400 ||
+                    error.response.status === 403 ||
+                    error.response.status === 401
+                ) {
+                    console.log(error);
+                }
+            });
+    };
     return (
         <div className="flex h-max flex-col">
             {/* mt-20 */}
@@ -134,7 +162,19 @@ function Search({
                         <a href="/">Watchlist</a>
                     </span>
                 </span>
-
+                {!loggedIn && (
+                    <span className="max-w-[200px] m-2 justify-center w-full text-center flex items-center rounded border border-gray-400/30">
+                        <button
+                            onClick={handleLoginGuest}
+                            className="w-full flex justify-center"
+                        >
+                            Guest
+                            <span className="hidden sm:flex ml-[0.5ch]">
+                                Log In
+                            </span>
+                        </button>
+                    </span>
+                )}
                 <span className="max-w-[200px] m-2 justify-center w-full text-center flex items-center rounded border border-gray-400/30">
                     {loggedIn && (
                         <>
@@ -164,12 +204,14 @@ function Search({
                     {!sidebar && (
                         <>
                             {!loggedIn && (
-                                <button
-                                    className="w-full"
-                                    onClick={handleLogIn}
-                                >
-                                    Log In
-                                </button>
+                                <>
+                                    <button
+                                        className="w-full"
+                                        onClick={handleLogIn}
+                                    >
+                                        Log In
+                                    </button>
+                                </>
                             )}
                             {loggedIn && (
                                 <>

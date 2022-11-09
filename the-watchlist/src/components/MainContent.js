@@ -17,7 +17,13 @@ function MainContent() {
     let [contentThree, setContentThree] = useState();
     // Check Screen size so that our interval can stop if were not in lg mode
     let [currSize, setCurrSize] = useState("sm");
-
+    let loadingContent = {
+        // moviePoster: ""
+        movieName: "..loading",
+        userRating: "loading..",
+        postUser: "..loading",
+        comment: "loading..",
+    };
     useEffect(() => {
         if (currSize === "sm") {
             const interval = setInterval(() => {
@@ -84,6 +90,13 @@ function MainContent() {
                     <TrendingSm content={contentOne} />
                     <TrendingSm content={contentTwo} />
                     <TrendingSm content={contentThree} />
+                </div>
+            )}
+            {loading && (
+                <div className="h-full flex max-h-[540px] sm:mt-10 bg-stone-50 gap-2 md:flex hidden">
+                    <TrendingSm content={loadingContent} />
+                    <TrendingSm content={loadingContent} />
+                    <TrendingSm content={loadingContent} />
                 </div>
             )}
             {!loading && (

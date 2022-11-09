@@ -146,6 +146,7 @@ function App() {
                         showRegister={showRegister}
                         setShowRegister={setShowRegister}
                         user={user}
+                        setUser={setUser}
                         currMovie={currMovie}
                         setCurrMovie={setCurrMovie}
                         setDisplayData={setDisplayData}
@@ -172,14 +173,14 @@ function App() {
                         // style={{ height: "calc(100vh - 110px)" }}
                         >
                             <MainContent />
-                            <SecondaryContent />
+                            <SecondaryContent loggedIn={loggedIn} user={user} />
                             <div className="m-2 bg-slate-900/90 p-4 text-white text-xl flex justify-evenly">
                                 <div className="w-[50%] text-center flex justify-center my-auto">
                                     TheWatchlist, Rate. Comment. Share!
                                 </div>
 
                                 <div className="flex w-[50%] justify-evenly ">
-                                    <div className="flex justify-center hover:bg-white rounded-full p-2 hover:text-[#242930] flex mx-auto">
+                                    <div className="flex justify-center hover:bg-white rounded-full p-2 hover:text-[#242930] flex mx-auto my-auto">
                                         <a
                                             href="https://github.com/Joey-Red"
                                             target="blank"
@@ -188,7 +189,7 @@ function App() {
                                             <FontAwesomeIcon
                                                 icon={faGithub}
                                                 size="lg"
-                                                className="flex justify-center"
+                                                className="flex justify-center my-auto"
                                             />
                                         </a>
                                     </div>
@@ -200,6 +201,7 @@ function App() {
                                             <FontAwesomeIcon
                                                 icon={faLinkedin}
                                                 size="lg"
+                                                className=" my-auto flex"
                                             />
                                         </a>
                                     </div>
@@ -211,6 +213,7 @@ function App() {
                                             <FontAwesomeIcon
                                                 icon={faTwitter}
                                                 size="lg"
+                                                className=" my-auto flex"
                                             />
                                         </a>
                                     </div>

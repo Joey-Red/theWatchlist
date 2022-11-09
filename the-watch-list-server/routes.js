@@ -113,6 +113,54 @@ router.get("/trending", (req, res) => {
             res.json(result);
         });
 });
+router.post("/similar", (req, res) => {
+    // Check all users to see if you share any movies
+    // Return user, and movie you share, and their rating
+
+    // MovieComment.find({ $query: {}, $orderby: { $dateAdded: -1 } }).limit(3),
+    MovieComment.find({})
+        // .sort({ $natural: -1 })
+        // .limit(3)
+        .exec(function (err, result) {
+            if (err) {
+                res.json(err);
+            }
+            let myArr = [];
+            let allArr = [];
+            result.forEach((film) => {
+                // console.log("resForEach: ", film);
+                if (req.body.user._id === film.postUserId) {
+                    myArr.push(
+                        film.movieName,
+                        film.userRating,
+                        film.moviePoster,
+                        film.comment,
+                        film.postUser
+                    );
+                }
+            });
+            result.forEach((film) => {
+                if (req.body.user._id !== film.postUserId) {
+                    allArr.push(film);
+                }
+                if (req.body.user._id === film.postUserId) {
+                    myArr.push({
+                        movieName: film.movieName,
+                        userRating: film.userRating,
+                        moviePoster: film.moviePoster,
+                        comment: film.comment,
+                        username: film.postUser,
+                    });
+                }
+            });
+            found = allArr.filter((val, index) => {
+                return myArr.includes(val.movieName);
+            });
+            // Then compare myArr with each other object,
+            // if you find a match on movieName
+            res.json(found);
+        });
+});
 router.get("/rankings", (req, res) => {
     MovieComment.find({}, (err, result) => {
         if (err) {
@@ -160,12 +208,14 @@ router.get("/rankings", (req, res) => {
                 // avgRating: film.movieRating / film.totalCount,
                 // poster: film.poster,
                 film,
+                avgRating: film.movieRating / film.totalCount,
             });
         });
         let sortArray = avgArray.sort((a, b) =>
             a.avgRating > b.avgRating ? -1 : 1
         );
         let topThree = sortArray.slice(0, 3);
+        // console.log(sortArray);
         // console.log(sortArray);
         res.json(topThree);
     });
