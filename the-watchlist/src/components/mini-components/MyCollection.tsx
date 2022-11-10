@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios, { AxiosError } from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,6 +29,7 @@ function MyCollection({
     let [editing, setEditing] = useState(false);
     let [deleting, setDeleting] = useState(false);
     let [success, setSuccess] = useState(false);
+    let [updateMsg, setUpdateMsg] = useState(false);
     let handleEdit = (e: any) => {
         setUserRating(e.userRating);
         setEditing(true);
@@ -49,16 +50,19 @@ function MyCollection({
                     // no users found?
                 } else {
                     // YO IT WAS UPDATED
+                    setUpdateMsg(true);
                 }
             })
             .catch(function (err) {
                 console.log(err);
             });
     };
-    // const params = {
-    //         id: rating._id,
-    //         user: user,
-    // };
+    useEffect(() => {
+        setTimeout(function () {
+            setUpdateMsg(false);
+        }, 3000);
+    }, [updateMsg]);
+
     let deleteMovie = () => {
         Axios.delete("http://localhost:8080/delete-movie", {
             data: {
@@ -84,8 +88,17 @@ function MyCollection({
             {!success && (
                 <>
                     {editing && (
-                        <div className="my-1 bg-blue-400 p-2 rounded w-full">
-                            <div>{rating.movieName}</div>
+                        <div className="flex my-2 sm:text-2xl  bg-neutral-900/10 p-2 w-full justify-between">
+                            <div className="w-full flex flex-col justify-center text">
+                                <div>
+                                    <p className="max-w-[20ch] mx-auto text-center">
+                                        {rating.movieName}
+                                    </p>
+                                    <p className="max-w-[20ch] mx-auto text-center">
+                                        Rating: {rating.userRating}
+                                    </p>
+                                </div>
+                            </div>
                             <div className="flex items-center">
                                 <div className="w-full flex justify-between">
                                     <div className="flex items-center mr-2">
@@ -127,32 +140,62 @@ function MyCollection({
                                     </div>
                                 </div>
                             </div>
+                            <img
+                                className="max-w-[100px] max-h-[148px] sm:max-h-[445px] sm:max-w-[300px] ml-auto"
+                                src={rating.moviePoster}
+                                alt={rating.movieName}
+                            />
                         </div>
                     )}
                     {!editing && (
                         <div
                             key={rating._id}
-                            className="my-1 bg-blue-400 p-2 rounded w-full justify-between flex items-center"
+                            className="flex my-2 sm:text-2xl  bg-neutral-900/10 p-2 w-full justify-between relative"
                         >
-                            {rating.movieName} - {rating.userRating}
+                            {updateMsg && (
+                                <p className="text-center mt-auto bg-neutral-900/90 text-[green] top-0 left-0 right-0 absolute">
+                                    Successfully updated rating!
+                                </p>
+                            )}
+
+                            <div className="w-full flex flex-col justify-center text">
+                                <div>
+                                    <p className="max-w-[20ch] mx-auto text-center">
+                                        {rating.movieName}
+                                    </p>
+                                    <p className="max-w-[20ch] mx-auto text-center">
+                                        Rating: {rating.userRating}
+                                    </p>
+                                </div>
+                            </div>
                             <div className="flex gap-2 items-center">
-                                <div className="flex gap-2 items-center flex-col sm:flex-row">
-                                    <div
-                                        onClick={() => setDeleting(true)}
-                                        className="hover:cursor-pointer hover:bg-red-900  bg-blue-900/20 rounded h-8 w-8 flex items-center justify-center text-white"
-                                    >
-                                        <FontAwesomeIcon icon={faEraser} />
-                                    </div>
-                                    {!disabled && (
+                                <div className="flex">
+                                    {" "}
+                                    <img
+                                        className="max-w-[100px] max-h-[148px] sm:max-h-[445px] sm:max-w-[300px] ml-auto"
+                                        src={rating.moviePoster}
+                                        alt={rating.movieName}
+                                    />
+                                    <div className="flex flex-col">
                                         <div
-                                            onClick={(e) => handleEdit(rating)}
-                                            className="hover:cursor-pointer hover:bg-green-900  bg-blue-900/20 rounded h-8 w-8 flex items-center justify-center text-white"
+                                            onClick={() => setDeleting(true)}
+                                            className="hover:cursor-pointer bg-red-900 bg-blue-900/20 grow p-1 flex text-white justify-center items-center"
                                         >
-                                            <FontAwesomeIcon
-                                                icon={faPencilAlt}
-                                            />
+                                            <FontAwesomeIcon icon={faEraser} />
                                         </div>
-                                    )}
+                                        {!disabled && (
+                                            <div
+                                                onClick={(e) =>
+                                                    handleEdit(rating)
+                                                }
+                                                className="hover:cursor-pointer bg-green-900 p-1 bg-blue-900/20 flex items-center justify-center text-white grow"
+                                            >
+                                                <FontAwesomeIcon
+                                                    icon={faPencilAlt}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                                 {disabled && (
                                     <div className="hover:cursor-pointer bg-blue-900/20 rounded h-8 w-8 flex items-center justify-center text-white">

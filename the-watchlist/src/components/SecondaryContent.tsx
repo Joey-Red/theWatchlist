@@ -83,7 +83,7 @@ function SecondaryContent({ user, loggedIn }: SecondaryContentProps) {
                     {!loadingTop && (
                         <div className="">
                             <div className="flex flex-col justify-between h-full gap-2 max-h-[600px] overflow-y-scroll">
-                                <div className="bg-slate-900/90 flex-col flex sm:min-h-[600px] rounded">
+                                <div className="bg-slate-900/90 flex-col flex sm:min-h-[600px] rounded-bl rounded-tl ">
                                     <p className="text-white text-xl text-center">
                                         Rank One
                                     </p>
@@ -109,7 +109,7 @@ function SecondaryContent({ user, loggedIn }: SecondaryContentProps) {
                                     </div>
                                     <div className="h-6"></div>
                                 </div>
-                                <div className="bg-slate-900/90 flex-col flex sm:min-h-[600px] rounded">
+                                <div className="bg-slate-900/90 flex-col flex sm:min-h-[600px] rounded-bl rounded-tl ">
                                     <p className="text-white text-xl text-center">
                                         Rank Two
                                     </p>
@@ -132,7 +132,7 @@ function SecondaryContent({ user, loggedIn }: SecondaryContentProps) {
                                     </div>
                                     <div className="h-6"></div>
                                 </div>
-                                <div className="bg-slate-900/90 flex-col flex sm:min-h-[600px] rounded justify-center">
+                                <div className="bg-slate-900/90 flex-col flex sm:min-h-[600px] rounded-bl rounded-tl justify-center">
                                     <p className="text-white text-xl text-center">
                                         Rank Three
                                     </p>

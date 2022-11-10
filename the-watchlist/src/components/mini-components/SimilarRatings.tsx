@@ -84,25 +84,6 @@ function SimilarRatings({ user, loggedIn }: SimilarRatingsProps) {
                             >
                                 <div>User: {a.postUser}</div>
                                 <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
-                                <div>Movie: {a.movieName}</div>
                                 {a.comment !== "No comment" &&
                                     a.comment !== "" && (
                                         <div>Comment: {a.comment}</div>

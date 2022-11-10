@@ -113,11 +113,33 @@ router.get("/trending", (req, res) => {
             res.json(result);
         });
 });
+router.post("/get_user/", (req, res) => {
+    // console.log(req.body);
+    MovieComment.find({}).exec(function (err, result) {
+        if (err) {
+            res.json(err);
+        }
+        let foundArr = [];
+        result.forEach((film) => {
+            if (req.body.user === film.postUserId) {
+                foundArr.push({
+                    movieName: film.movieName,
+                    userRating: film.userRating,
+                    moviePoster: film.moviePoster,
+                    comment: film.comment,
+                    username: film.postUser,
+                });
+            }
+        });
+        if (foundArr.length === 0) {
+            res.json("No User Found");
+        }
+        res.json(foundArr);
+    });
+});
 router.post("/similar", (req, res) => {
     // Check all users to see if you share any movies
     // Return user, and movie you share, and their rating
-
-    // MovieComment.find({ $query: {}, $orderby: { $dateAdded: -1 } }).limit(3),
     MovieComment.find({})
         // .sort({ $natural: -1 })
         // .limit(3)

@@ -6,12 +6,10 @@ import SharedProfile from "./components/mini-components/SharedProfile";
 function FrontRouter() {
     return (
         <div>
-            <Routes>
-                {" "}
+            {/* <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/user:id" element={<SharedProfile />} />
-                {/* <App /> */}
-            </Routes>
+            </Routes> */}
         </div>
     );
 }

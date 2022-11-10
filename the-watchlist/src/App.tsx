@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, HashRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Search from "./components/Search";
 import Sidebar from "./components/Sidebar";
-import placeholder from "./img/peepoHey.jpg";
-import placeholder2 from "./img/pepejam.png";
-import placeholder3 from "./img/SpecsRedBrew.png";
 import MainContent from "./components/MainContent";
 import SecondaryContent from "./components/SecondaryContent";
 import Mylist from "./components/Mylist";
@@ -12,12 +11,14 @@ import MemberList from "./components/MemberList";
 import LogIn from "./components/LogIn";
 import Register from "./components/Register";
 import DisplayData from "./components/DisplayData";
+import FrontRouter from "./FrontRouter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faGithub,
     faLinkedin,
     faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import SharedProfile from "./components/mini-components/SharedProfile";
 function App() {
     // Displaying components
     let [mainContent, setMainContent] = useState(true);
@@ -51,20 +52,13 @@ function App() {
     let [runTime, setRunTime] = useState("");
     let [disabledSearch, setDisabledSearch] = useState(false);
 
-    // console.log(title, runTime, writers, poster);
-    // Ctrl + delete Deletes forward word PoG
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
-        // console.log(loggedInUser);
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
-            // console.log(foundUser);
-            // setUser(loggedInUser);
             setUser(foundUser);
             setLoggedIn(true);
-            // console.log("setuser");
         }
-        // console.log(user);
     }, []);
     let hideOverflow = {
         overflow: "hidden",
@@ -133,7 +127,8 @@ function App() {
                         />
                     )}
                 </aside>
-                <div className="flex flex-col w-full">
+
+                <div className="flex flex-col w-full h-full">
                     <Search
                         setTitle={setTitle}
                         setLoading={setLoading}
@@ -165,16 +160,27 @@ function App() {
                         disabledSearch={disabledSearch}
                         setDisabledSearch={setDisabledSearch}
                     />{" "}
-                    {/* Always Active */}
                     {mainContent && (
-                        <div
-                        // className="overflow-hidden"
-                        // style={{ height: "calc(100vh - 110px)" }} - works except sm
-                        // style={{ height: "calc(100vh - 110px)" }}
-                        >
-                            <MainContent />
-                            <SecondaryContent loggedIn={loggedIn} user={user} />
-                            <div className="m-2 bg-slate-900/90 p-4 text-white text-xl flex justify-evenly">
+                        <div className="flex flex-col h-full">
+                            <Routes>
+                                <Route
+                                    path="/user:id"
+                                    element={<SharedProfile />}
+                                />
+                                <Route
+                                    path="/"
+                                    element={
+                                        <>
+                                            <MainContent />
+                                            <SecondaryContent
+                                                loggedIn={loggedIn}
+                                                user={user}
+                                            />
+                                        </>
+                                    }
+                                />
+                            </Routes>
+                            <div className="mt-auto mx-2 bg-slate-900/90 p-4 text-white text-xl flex justify-evenly">
                                 <div className="w-[50%] text-center flex justify-center my-auto">
                                     TheWatchlist, Rate. Comment. Share!
                                 </div>

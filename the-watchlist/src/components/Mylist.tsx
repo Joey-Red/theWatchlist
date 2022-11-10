@@ -25,7 +25,7 @@ function Mylist({ user }: MyListProps) {
                     // no users found?
                 } else {
                     setMovies(res.data);
-                    // console.log("data: ", res.data);
+                    console.log("data: ", res.data);
                     setLoading(false);
                 }
             })
@@ -57,24 +57,14 @@ function Mylist({ user }: MyListProps) {
         }
     });
     return (
-        <div className="flex flex-col items-center m-2 overflow-y-scroll">
+        <div
+            className="flex flex-col items-center m-2"
+            style={{ overflowY: "auto" }}
+        >
             <div className="mt-4 text-2xl text-center">
                 Your personal movie collection.
             </div>
             {displayMovieArr}
-            {/* New rating */}
-            {/* <div className="my-1 bg-blue-400/30 p-2 rounded w-full flex items-center">
-                <div className="w-full flex justify-between">
-                    <div className="flex items-center mr-2">
-                        <span>Add another movie?</span>
-                    </div>
-                    <div className="flex gap-2">
-                        <div className="hover:cursor-pointer hover:bg-green-900 bg-blue-900/20 rounded h-8 w-8 flex items-center justify-center text-white">
-                            <FontAwesomeIcon icon={faPlus} />
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 }

@@ -3,7 +3,7 @@ import React from "react";
 function LoadingMany() {
     return (
         <div>
-            <div className="my-2 p-2 bg-slate-900/90 rounded text-white h-full">
+            <div className="my-2 p-2 bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -19,7 +19,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>
-            <div className="my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -35,7 +35,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>{" "}
-            <div className="my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -51,7 +51,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>
-            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -67,7 +67,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>
-            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -83,7 +83,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>
-            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -99,7 +99,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>
-            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
@@ -115,7 +115,7 @@ function LoadingMany() {
                     </div>
                 </div>
             </div>
-            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded text-white h-full">
+            <div className="flex-grow my-2 p-2  bg-slate-900/90 rounded-bl rounded-tl  text-white h-full">
                 <div className="border border-grey-900 shadow rounded-md p-4 max-w-sm w-full mx-auto">
                     <div className="animate-pulse flex space-x-4">
                         <div className="flex-1 space-y-6 py-1">
