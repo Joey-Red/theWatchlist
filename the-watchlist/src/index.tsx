@@ -1,5 +1,7 @@
 import React from "react";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import ReactDOM from "react-dom/client";
+import FrontRouter from "./FrontRouter";
 import App from "./App";
 import "./index.css";
 const root = ReactDOM.createRoot(
@@ -7,6 +9,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <App />
+        {/* <HashRouter>
+            <FrontRouter />
+        </HashRouter> */}
+        {/* <FrontRouter /> */}
+        <BrowserRouter>
+            <FrontRouter />
+        </BrowserRouter>
     </React.StrictMode>
 );

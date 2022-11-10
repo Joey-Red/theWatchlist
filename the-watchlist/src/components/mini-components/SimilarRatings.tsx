@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Axios, { AxiosError } from "axios";
 import LoadingOne from "./Trending/LoadingOne";
-import theater from "../../img/theater.jpg";
+import theater from "../../img/theater2.jpg";
 interface SimilarRatingsProps {
     user: Object;
     loggedIn: Boolean;
@@ -50,13 +50,13 @@ function SimilarRatings({ user, loggedIn }: SimilarRatingsProps) {
                     // }}
                 >
                     <div className="w-full relative flex border rounded border-white">
-                        <div
+                        {/* <div
                             className="absolute top-0 bottom-0 left-0 right-0 bg-neutral-900/90 contrast-[0.75] blur-sm"
                             style={{
-                                background: `url(${theater}) center center no-repeat`,
+                                background: `url(${theater}) center center no-repeat fixed`,
                                 backgroundSize: "cover",
                             }}
-                        ></div>{" "}
+                        ></div>{" "} */}
                         <div className="text-center text-white text-2xl flex z-20 rounded m-4 p-4 my-auto bg-neutral-900/90">
                             Log in and start adding movies to see which movies
                             you and others have in common!
@@ -69,13 +69,13 @@ function SimilarRatings({ user, loggedIn }: SimilarRatingsProps) {
                     style={{ overflowY: "auto" }}
                     className="relative flex flex-col max-h-[300px] min-h-[300px] overflow-x-[hidden]"
                 >
-                    <div
+                    {/* <div
                         className="absolute top-[0] bottom-[0] left-[0] right-[0] bg-neutral-900/90 contrast-[0.75] blur-sm"
                         style={{
-                            background: `url(${theater}) no-repeat`,
+                            background: `url(${theater}) center center fixed no-repeat`,
                             backgroundSize: "cover",
                         }}
-                    ></div>
+                    ></div> */}
                     {similarUsers.map((a: any) => {
                         return (
                             <div

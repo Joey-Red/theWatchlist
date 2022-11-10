@@ -9,6 +9,7 @@ import LoadingMany from "./mini-components/LoadingMany";
 import LoadingOne from "./mini-components/Trending/LoadingOne";
 import LoadingOneAlt from "./mini-components/Trending/LoadingOneAlt";
 import SimilarRatings from "./mini-components/SimilarRatings";
+import theater from "../img/theater.jpg";
 
 interface SecondaryContentProps {
     user: Object;
@@ -53,11 +54,25 @@ function SecondaryContent({ user, loggedIn }: SecondaryContentProps) {
     return (
         <div className="flex-grow flex gap-2 m-2 mt-0 flex-col sm:flex-row">
             <div className="sm:w-[50%] rounded flex flex-col">
-                <div className="bg-slate-900/90 rounded">
+                <div
+                    // style={{ background: "rgba(0,0,0 / 100%)" }}
+                    className=" bg-slate-900/90  rounded"
+                    // style={{
+                    //     background: `url(${theater}) center center no-repeat`,
+                    //     backgroundSize: "cover",
+                    // }}
+                >
                     <p className="p-2 pb-0 text-center text-white text-xl text-center">
                         Users with similar ratings
                     </p>
-                    <div className="flex flex-col p-2 pt-0 rounded">
+                    <div className="flex flex-col p-2 pt-0 rounded relative">
+                        <div
+                            className="absolute top-[0] bottom-[0] left-[0] right-[0] bg-neutral-900/90 contrast-[0.75] blur-sm"
+                            style={{
+                                background: `url(${theater}) center center no-repeat`,
+                                backgroundSize: "cover",
+                            }}
+                        ></div>
                         <SimilarRatings user={user} loggedIn={loggedIn} />
                     </div>
                 </div>
