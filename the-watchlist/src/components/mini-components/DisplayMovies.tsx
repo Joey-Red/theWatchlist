@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Axios, { AxiosError } from "axios";
 import { v4 as uuidv4 } from "uuid";
+import LoadingOne from "./Trending/LoadingOne";
+import LoadingMany from "./LoadingMany";
 interface DisplayMoviesProps {
     user: any;
 }
@@ -42,13 +44,29 @@ function DisplayMovies({ user }: DisplayMoviesProps) {
 
     ratingArray.forEach((rating: any) => {
         if (rating.postUserId === user._id) {
+            // console.log(rating.movieName, rating.moviePoster);
             newRatingArr.push(rating.userRating);
             // Getting user rating and comment of each movie
             displayMovieArr.push(
-                <div key={uuidv4()}>
-                    <div>
+                <div
+                    key={uuidv4()}
+                    className="flex flex-col sm:text-xl p-2 min-w-[33%] justify-between items-center"
+                    style={{
+                        overflowY: "auto",
+                        textOverflow: "clip",
+                        // whiteSpace: "nowrap",
+                        overflowX: "hidden",
+                    }}
+                >
+                    <div className="text-center">
                         {rating.movieName} - {rating.userRating}
                     </div>
+                    <img
+                        className="max-w-[100px] max-h-[148px] mx-auto mt-auto"
+                        // sm:max-h-[445px] sm:max-w-[300px]
+                        src={rating.moviePoster}
+                        alt={rating.movieName}
+                    />
                     {rating.comment !== "No comment" && rating.comment !== "" && (
                         <div style={{ overflowWrap: "break-word" }}>
                             <button
@@ -56,16 +74,27 @@ function DisplayMovies({ user }: DisplayMoviesProps) {
                                 value={rating.comment + rating.movieName}
                                 onClick={showComment}
                             >
-                                Toggle Comment
+                                Show Comment
                             </button>{" "}
                             <div
-                                className="hidden"
+                                className="flex flex-col hidden break-all bg-neutral-900/90 text-white p-4 z-20 rounded min-h-xs max-h-[90%] max-w-[90%] w-[40ch] absolute left-0 top-[50%] right-0 mx-auto my-auto"
                                 id={rating.comment + rating.movieName}
                             >
                                 {rating.comment}
+                                <button
+                                    className="bg-black px-1 rounded text-sm"
+                                    value={rating.comment + rating.movieName}
+                                    onClick={showComment}
+                                >
+                                    Hide Comment
+                                </button>
                             </div>
                         </div>
                     )}
+                    {rating.comment === "No comment" ||
+                        (rating.comment === "" && (
+                            <div className="sm:h-[28px] h-[46px]"></div>
+                        ))}
                 </div>
             );
         }
@@ -86,16 +115,27 @@ function DisplayMovies({ user }: DisplayMoviesProps) {
 
     return (
         <>
-            {loading && <>Loading....</>}
+            {loading && (
+                <>
+                    <div
+                        key={uuidv4()}
+                        className="bg-neutral-900/10 text-lg rounded m-1 p-2 relative"
+                    >
+                        <LoadingMany />
+                    </div>
+                </>
+            )}
             {!loading && (
                 <div
                     key={user._id}
-                    className=" bg-blue-200/50 text-lg rounded m-1 p-2"
+                    className="bg-neutral-900/10 text-lg rounded m-1 p-2"
                 >
-                    <div className="text-center pseudo">
+                    <div className="text-center pseudo sm:text-xl">
                         {user.username} Avg rating: {avg}
                     </div>
-                    <div>{displayMovieArr}</div>
+                    <div className="flex flex-wrap justify-center">
+                        {displayMovieArr}
+                    </div>
                 </div>
             )}
         </>

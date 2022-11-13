@@ -25,6 +25,7 @@ interface SidebarProps {
     showRegister: Boolean;
     setShowRegister: Function;
     setUser: Function;
+    setSettings: Function;
 }
 function Sidebar({
     setMainContent,
@@ -40,23 +41,38 @@ function Sidebar({
     showRegister,
     setShowRegister,
     setUser,
+    setSettings,
 }: SidebarProps) {
     const viewList = () => {
+        setSettings(false);
         setMyList(true);
         setOtherList(false);
         setMemberList(false);
+        setSidebar(false);
         setMainContent(false);
     };
     const viewOthers = () => {
         setOtherList(true);
         setMainContent(false);
+        setSettings(false);
         setMemberList(false);
         setMyList(false);
+        setSidebar(false);
     };
     const seeMembers = () => {
         setMemberList(true);
         setOtherList(false);
         setMainContent(false);
+        setSidebar(false);
+        setMyList(false);
+        setSettings(false);
+    };
+    const showSettings = () => {
+        setMemberList(false);
+        setSettings(true);
+        setOtherList(false);
+        setMainContent(false);
+        setSidebar(false);
         setMyList(false);
     };
     let searchBar = document.getElementById("search");
@@ -65,6 +81,7 @@ function Sidebar({
             searchBar.focus();
             searchBar.style.backgroundColor = "rgb(254,202,202)";
             searchBar.style.transition = "100ms linear all";
+            setSidebar(false);
         }
     };
     const handleLogout = () => {
@@ -73,20 +90,8 @@ function Sidebar({
         window.location.replace("http://localhost:3001/");
         setLoggedIn(false);
     };
-    // useEffect(() => {
-    //     if (searchBar !== null && searchBar !== undefined) {
-    //         searchBar.style.backgroundColor = "white";
-    //         console.log("t22est");
-    //     }
-    //     console.log("test");
-    // });
-    // const showSidebar = () => {
-    //     setSidebar(true);
-    // };
-    // let sidebarContainer = document.getElementById("sidebar");
     let closeSidebar = () => {
         setSidebar(false);
-        // sidebarContainer?.classList.add("hidden");
     };
     return (
         <div
@@ -140,7 +145,10 @@ function Sidebar({
             </div>
             <div className="flex flex-col">
                 <div className="py-4 px-0 justify-center flex">
-                    <div className="flex text-md p-3 bg-white rounded-full hover:bg-neutral-900 hover:text-white">
+                    <div
+                        onClick={showSettings}
+                        className="flex text-md p-3 bg-white rounded-full hover:bg-neutral-900 hover:text-white"
+                    >
                         <FontAwesomeIcon icon={faGear} size="xl" />
                     </div>
                     {/* <p className="ml-4">Settings</p> */}

@@ -6,12 +6,14 @@ interface logInProps {
     setShowLogIn: Function;
     setLoggedIn: Function;
     setUser: Function;
+    setSidebar: Function;
 }
 function LogIn({
     setShowRegister,
     setShowLogIn,
     setLoggedIn,
     setUser,
+    setSidebar,
 }: logInProps) {
     let [usernameField, setUsernameField] = useState("");
     let [passwordField, setPasswordField] = useState("");

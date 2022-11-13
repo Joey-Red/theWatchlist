@@ -80,6 +80,7 @@ function Search({
     };
     let handleLogIn = () => {
         setShowLogIn(true);
+        setSidebar(false);
     };
 
     const searchFilm = (e: React.MouseEvent<HTMLButtonElement>) => {

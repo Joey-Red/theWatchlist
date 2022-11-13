@@ -4,9 +4,10 @@ import LoadingOne from "./Trending/LoadingOne";
 
 function SharedProfile() {
     let [movieList, setMovieList]: any = useState([{}]);
-    let [userFound, setNoUserFound] = useState(false);
+    let [noUserFound, setNoUserFound] = useState(false);
     let [loaded, setLoaded] = useState(false);
     let [userId, setUserId] = useState("");
+    let [userFound, setUserFound] = useState(false);
     useEffect(() => {
         let windowLoc = window.location.href;
         let splitUrl = windowLoc.split("/");
@@ -24,9 +25,13 @@ function SharedProfile() {
             .then((res) => {
                 if (res.data.name === "CastError") {
                     setNoUserFound(true);
-                    // console.log(noEventFound);
+                    setLoaded(true);
+                } else if (res.data === "No User Found") {
+                    setNoUserFound(true);
+                    setLoaded(true);
                 } else {
                     setMovieList(res.data);
+                    setUserFound(true);
                     setLoaded(true);
                     setNoUserFound(false);
                 }
@@ -35,9 +40,9 @@ function SharedProfile() {
                 console.log(err);
             });
     };
-    useEffect(() => {
-        console.log(movieList);
-    }, [movieList]);
+    // useEffect(() => {
+    //     console.log(movieList);
+    // }, [movieList]);
 
     // Take username from url
     // <div className="bg-stone-100 flex justify-center w-full">
@@ -78,13 +83,19 @@ function SharedProfile() {
                     </div>
                 </>
             )}
-            {loaded && (
+            {loaded && userFound && (
                 <div className="text-2xl text-center bg-neutral-900/90 text-white rounded">
                     {movieList[0].username}'s Watchlist!
                 </div>
             )}
-
+            {noUserFound && (
+                <div className="bg-neutral-900/90 rounded p-4 text-center text-xl text-white">
+                    Either no users were found, or they have not added any
+                    movies to their list.
+                </div>
+            )}
             {loaded &&
+                userFound &&
                 movieList.map((film: any) => {
                     return (
                         <div

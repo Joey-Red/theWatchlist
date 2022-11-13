@@ -11,6 +11,7 @@ const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 const User = require("./Schematics/User");
 const cors = require("cors");
+User.createStrategy();
 
 dotenv.config();
 

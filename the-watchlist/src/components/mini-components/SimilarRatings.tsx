@@ -79,7 +79,7 @@ function SimilarRatings({ user, loggedIn }: SimilarRatingsProps) {
                     {similarUsers.map((a: any) => {
                         return (
                             <div
-                                key={a._id}
+                                key={a._id + a.postUser + a.movieName}
                                 className="z-20 my-2 p-2 text-lg flex flex-col text-white break-all max-w-[504px]"
                             >
                                 <div>User: {a.postUser}</div>

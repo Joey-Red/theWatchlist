@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 const User = require("./Schematics/User");
 const Post = require("./Schematics/Post");
 const MovieComment = require("./Schematics/MovieComment");
+User.createStrategy();
+// const LocalStrategy = require("passport-local").Strategy;
+// var passportLocalMongoose = require("passport-local-mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 // mongoose.set("debug", true);
@@ -24,6 +27,7 @@ router.post("/create-post", (req, res, next) => {
         res.json(req.body);
     });
 });
+
 router.post("/ratings", (req, res, next) => {
     MovieComment.find(
         { $match: { _id: req.body.postUser._id } },
@@ -57,6 +61,28 @@ router.delete("/delete-movie", (req, res, next) => {
         res.json(docs);
     });
 });
+router.delete("/delete-user", (req, res, next) => {
+    // console.log(req.body);
+    if (req.body.user._id !== "6371630467b166d0d8666ea0") {
+        MovieComment.deleteMany(
+            { postUserId: req.body.user._id },
+            function (err, docs) {
+                if (err) {
+                    res.json(err);
+                }
+            }
+        );
+        User.findByIdAndDelete(
+            { _id: req.body.user._id },
+            function (err, docs) {
+                if (err) {
+                    res.json(err);
+                }
+                res.json(docs);
+            }
+        );
+    }
+});
 router.put("/update-movies", (req, res, next) => {
     User.findOneAndUpdate(
         { _id: req.body.postUser._id },
@@ -68,12 +94,46 @@ router.put("/update-movies", (req, res, next) => {
             res.json(docs);
         }
     );
-    // .save((err) => {
-    //     if (err) {
-    //         return next(err);
-    //     }
-    //     res.json(req.body);
-    // });
+});
+router.put("/update-password", function (req, res) {
+    console.log(req.body);
+    User.findOne({ _id: req.body.user._id }, (err, foundUser) => {
+        // Check if error connecting
+        if (err) {
+            res.json({ success: false, message: err }); // Return error
+        } else {
+            // Check if user was found in database
+            if (!foundUser) {
+                res.json({ success: false, message: "User not found" });
+            } else {
+                // console.log(foundUser);
+                foundUser.changePassword(
+                    req.body.oldPw,
+                    req.body.newPw,
+                    function (err) {
+                        if (err) {
+                            if (err.name === "IncorrectPasswordError") {
+                                res.json({
+                                    success: false,
+                                    message: "Incorrect password",
+                                }); // Return error
+                            } else {
+                                res.json({
+                                    success: false,
+                                    message: "Something went wrong.",
+                                });
+                            }
+                        } else {
+                            res.json({
+                                success: true,
+                                message: "Success",
+                            });
+                        }
+                    }
+                );
+            }
+        }
+    });
 });
 router.post("/movie-comment", (req, res, next) => {
     const movieComment = new MovieComment({
@@ -133,8 +193,9 @@ router.post("/get_user/", (req, res) => {
         });
         if (foundArr.length === 0) {
             res.json("No User Found");
+        } else {
+            res.json(foundArr);
         }
-        res.json(foundArr);
     });
 });
 router.post("/similar", (req, res) => {
@@ -296,12 +357,6 @@ router.post(
     }
 );
 
-// router.post("/", (req, res) => {
-//     Post.findByIdAndRemove(req.body.deleteMessage, function deleteMessage(err) {
-//         if (err) return next(err);
-//         res.redirect("/");
-//     });
-// });
 router.get("/log-out", (req, res) => {
     req.logout(function (err) {
         if (err) {

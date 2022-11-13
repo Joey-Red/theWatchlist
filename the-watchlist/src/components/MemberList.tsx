@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios, { AxiosError } from "axios";
 import DisplayMovies from "./mini-components/DisplayMovies";
+import LoadingMany from "./mini-components/LoadingMany";
 
 function MemberList() {
     const [listOfUsers, setListOfUsers] = useState<any>([{}]);
@@ -23,7 +24,9 @@ function MemberList() {
     return (
         <div className="overflow-y-scroll">
             {loading ? (
-                <div>Loading...</div>
+                <div>
+                    <LoadingMany />
+                </div>
             ) : (
                 <>
                     {listOfUsers.map((user: any) => {

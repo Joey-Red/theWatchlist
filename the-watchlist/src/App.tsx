@@ -19,6 +19,7 @@ import {
     faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import SharedProfile from "./components/mini-components/SharedProfile";
+import Settings from "./Settings";
 function App() {
     // Displaying components
     let [mainContent, setMainContent] = useState(true);
@@ -29,7 +30,7 @@ function App() {
     let [showRegister, setShowRegister] = useState(false);
     let [showLogIn, setShowLogIn] = useState(false);
     let [displayData, setDisplayData] = useState(false);
-
+    let [settings, setSettings] = useState(false);
     // Logged in Status
     let [loggedIn, setLoggedIn] = useState(false);
     let [user, setUser] = useState({});
@@ -105,6 +106,7 @@ function App() {
                     setShowLogIn={setShowLogIn}
                     setLoggedIn={setLoggedIn}
                     setUser={setUser}
+                    setSidebar={setSidebar}
                 />
             )}
             <div className="flex w-screen max-w-screen-lg h-screen bg-slate-50">
@@ -124,6 +126,7 @@ function App() {
                             setShowLogIn={setShowLogIn}
                             showRegister={showRegister}
                             setShowRegister={setShowRegister}
+                            setSettings={setSettings}
                         />
                     )}
                 </aside>
@@ -230,6 +233,13 @@ function App() {
                     {myList && <Mylist user={user} />}
                     {otherList && <Otherlist />}
                     {memberList && <MemberList />}
+                    {settings && (
+                        <Settings
+                            user={user}
+                            setUser={setUser}
+                            setLoggedIn={setLoggedIn}
+                        />
+                    )}
                 </div>
             </div>
         </div>

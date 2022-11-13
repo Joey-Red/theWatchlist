@@ -51,6 +51,8 @@ function MyCollection({
                 } else {
                     // YO IT WAS UPDATED
                     setUpdateMsg(true);
+                    setEditing(false);
+                    setDisabled(false);
                 }
             })
             .catch(function (err) {
@@ -89,23 +91,25 @@ function MyCollection({
                 <>
                     {editing && (
                         <div className="flex my-2 sm:text-2xl  bg-neutral-900/10 p-2 w-full justify-between">
-                            <div className="w-full flex flex-col justify-center text">
-                                <div>
-                                    <p className="max-w-[20ch] mx-auto text-center">
-                                        {rating.movieName}
-                                    </p>
-                                    <p className="max-w-[20ch] mx-auto text-center">
-                                        Rating: {rating.userRating}
-                                    </p>
+                            <div className="flex flex-col w-full">
+                                <div className="w-full flex flex-col justify-center my-auto">
+                                    <div>
+                                        <p className="max-w-[20ch] mx-auto text-center">
+                                            {rating.movieName}
+                                        </p>
+                                        <p className="max-w-[20ch] mx-auto text-center">
+                                            Rating: {rating.userRating}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="w-full flex justify-between">
-                                    <div className="flex items-center mr-2">
-                                        <div>
-                                            <label htmlFor="userRating">
-                                                Rating (1-10)
-                                            </label>
+                                <div className="flex items-center sm:flex-row flex-col m-2">
+                                    <div className="w-full flex justify-center items-center">
+                                        <div className="flex items-center mr-2">
+                                            <div>
+                                                <label htmlFor="userRating">
+                                                    Rating (1-10)
+                                                </label>
+                                            </div>
                                         </div>
                                         <div className="flex">
                                             <input
@@ -141,7 +145,7 @@ function MyCollection({
                                 </div>
                             </div>
                             <img
-                                className="max-w-[100px] max-h-[148px] sm:max-h-[445px] sm:max-w-[300px] ml-auto"
+                                className="max-w-[100px] max-h-[148px] sm:max-h-[445px] sm:max-w-[300px] ml-auto my-auto"
                                 src={rating.moviePoster}
                                 alt={rating.movieName}
                             />
