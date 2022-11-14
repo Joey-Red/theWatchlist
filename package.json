@@ -25,7 +25,7 @@
     "author": "Joey Dalrymple",
     "license": "ISC",
     "scripts": {
-        "postinstall": "if [ $CLIENT_ENV ]; then npm run postinstall-client; elif [ $SERVER_ENV ]; then npm run postinstall-server; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
+        "start": "if [ $CLIENT_ENV ]; then npm run postinstall-client; elif [ $SERVER_ENV ]; then npm run postinstall-server; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
         "postinstall-client": "cd the-watchlist && npm install --force && npm run build",
         "postinstall-server": "cd the-watch-list-server && npm install --force"
     },
