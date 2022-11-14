@@ -1,5 +1,35 @@
 {
-  "dependencies": {
-    "react-router-dom": "^6.4.3"
-  }
+    "name": "theWatchlist",
+    "version": "0.0.0",
+    "private": true,
+    "description": "REST API back end, React front end full stack MERN app monorepo movie rating web app.",
+    "homepage": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Joey-Red/theWatchlist/"
+    },
+    "keywords": [
+        "static",
+        "MERN",
+        "Mongoose",
+        "MongoDB",
+        "Express",
+        "React",
+        "Node",
+        "Tailwind",
+        "Passport",
+        "Axios",
+        "bcrypt",
+        "Router"
+    ],
+    "author": "Joey Dalrymple",
+    "license": "ISC",
+    "scripts": {
+        "postinstall": "if [ $CLIENT_ENV ]; then npm run postinstall-client; elif [ $SERVER_ENV ]; then npm run postinstall-server; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
+        "postinstall-client": "cd the-watchlist && npm install --force && npm run build",
+        "postinstall-server": "cd the-watch-list-server && npm install --force"
+    },
+    "dependencies": {
+        "react-router-dom": "^6.4.3"
+    }
 }
