@@ -1,23 +1,48 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 interface trendingLgProps {
     content: any;
 }
+const variants = {
+    enter: (direction: number) => {
+        return {
+            x: direction > 0 ? 1000 : -1000,
+            // opacity: 0,
+        };
+    },
+    center: {
+        // zIndex: 1,
+        x: 0,
+        // opacity: 1,
+    },
+    exit: (direction: number) => {
+        return {
+            // zIndex: 0,
+            x: direction < 0 ? 1000 : -1000,
+            // opacity: 0,
+        };
+    },
+};
 function TrendingLg({ content }: trendingLgProps) {
     let [opaque, setOpaque] = useState(false);
     let opaqueStyle = {
         display: "none",
     };
     let none = {};
+
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0.8 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0.8 }}
             style={{
-                background: `url(${content.moviePoster}) `,
+                background: `url(${content.moviePoster}) center center`,
                 backgroundSize: "cover",
             }}
             onMouseEnter={() => setOpaque(true)}
             onMouseLeave={() => setOpaque(false)}
-            className="flex-col relative min-h-[143px] max-h-[540px] w-full sm:w-1/3 rounded sm:rounded-tr-[0px] sm:rounded-tl-[0px] flex bg-blue-200 "
+            className="flex-col relative min-h-[252px] max-h-[252px] w-full sm:w-1/3 rounded sm:rounded-tr-[0px] sm:rounded-tl-[0px] flex bg-blue-200 "
         >
             <div
                 style={opaque ? opaqueStyle : none}
@@ -33,7 +58,7 @@ function TrendingLg({ content }: trendingLgProps) {
                     )}
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

@@ -14,7 +14,7 @@ function TrendingMd({ content }: TrendingMdProps) {
                 background: `url(${content.moviePoster}) `,
                 backgroundSize: "cover",
             }}
-            className="flex-col relative max-h-[540px] min-h-[143px] w-full sm:w-1/2 rounded sm:rounded-tr-[0px] sm:rounded-tl-[0px] flex bg-blue-200 "
+            className="flex-col relative max-h-[252px] min-h-[252px] w-full sm:w-1/2 rounded sm:rounded-tr-[0px] sm:rounded-tl-[0px] flex bg-blue-200 "
             onMouseEnter={() => setOpaque(true)}
             onMouseLeave={() => setOpaque(false)}
         >

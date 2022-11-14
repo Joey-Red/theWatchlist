@@ -36,3 +36,6 @@ textarea {
     background: #171717e6;
     border-radius: 9px;
 }
+.update-pass:disabled {
+    background-color: #585858;
+}

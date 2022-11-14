@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios, { AxiosError } from "axios";
+import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faArrowAltCircleDown,
@@ -24,6 +25,26 @@ function MainContent() {
         postUser: "..loading",
         comment: "loading..",
     };
+    // const variants = {
+    //     enter: (direction) => {
+    //         return {
+    //             x: direction > 0 ? 1000 : -1000,
+    //             opacity: 0,
+    //         };
+    //     },
+    //     center: {
+    //         zIndex: 1,
+    //         x: 0,
+    //         opacity: 1,
+    //     },
+    //     exit: (direction) => {
+    //         return {
+    //             zIndex: 0,
+    //             x: direction < 0 ? 1000 : -1000,
+    //             opacity: 0,
+    //         };
+    //     },
+    // };
     useEffect(() => {
         if (currSize === "sm") {
             const interval = setInterval(() => {
@@ -80,6 +101,7 @@ function MainContent() {
                 console.log(err);
             });
     }, []);
+
     return (
         <div className="h-min relative max-h-[540px] h-2/6 flex flex-col bg-slate-50 rounded group m-2">
             <div className="rounded-tr rounded-tl flex bg-slate-900/90 text-white py-2 min-w-full max-w-full absolute hidden sm:flex">
@@ -109,14 +131,14 @@ function MainContent() {
                 <div className="h-full flex sm:mt-10 max-h-[540px]  bg-stone-50 gap-2 sm:hidden">
                     <button
                         onClick={() => changeCount(-1)}
-                        className="z-20 hover:bg-white hover:text-black text-white absolute left-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tl rounded-bl"
+                        className="z-30 hover:bg-white min-h-[252px] hover:text-black text-white absolute left-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tl rounded-bl"
                     >
                         <FontAwesomeIcon icon={faArrowAltCircleLeft} />
                     </button>
                     {index === 1 && !loading && (
                         <TrendingLg content={contentOne} />
+                        // </motion.div>
                     )}
-
                     {index === 2 && !loading && (
                         <TrendingLg content={contentTwo} />
                     )}
@@ -126,7 +148,7 @@ function MainContent() {
                     )}
                     <button
                         onClick={() => changeCount(1)}
-                        className="z-20 hover:bg-white hover:text-black text-white absolute right-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tr rounded-br"
+                        className="z-30 min-h-[252px] hover:bg-white hover:text-black text-white absolute right-0 top-0 bottom-0 w-8 bg-slate-900/60 rounded-tr rounded-br"
                     >
                         <FontAwesomeIcon icon={faArrowAltCircleRight} />
                     </button>

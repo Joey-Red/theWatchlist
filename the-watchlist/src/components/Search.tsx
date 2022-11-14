@@ -39,6 +39,7 @@ interface SearchProps {
     disabledSearch: any;
     setDisabledSearch: Function;
     setUser: Function;
+    setNotFound: Function;
 }
 
 function Search({
@@ -71,6 +72,7 @@ function Search({
     setRunTime,
     disabledSearch,
     setDisabledSearch,
+    setNotFound,
 }: SearchProps) {
     let [currSearch, setCurrSearch] = useState("");
     // let sidebarContainer = document.getElementById("sidebar");
@@ -110,7 +112,10 @@ function Search({
                     setTitle(res.data.Title);
                     setRunTime(res.data.Runtime);
                     setLoading(false);
-                    // console.log(res);
+                }
+                if (res.data.Error === "Movie not found!") {
+                    setNotFound(true);
+                    setLoading(false);
                 }
             })
             .catch(function (error: AxiosError | string | object | any) {
@@ -119,7 +124,6 @@ function Search({
                     error.response.status === 403 ||
                     error.response.status === 401
                 ) {
-                    // setShowErr(true);
                     console.log(error);
                 }
             });

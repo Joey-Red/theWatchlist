@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+// var LocalStrategy = require("passport-local-mongoose");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
@@ -11,7 +12,7 @@ const session = require("express-session");
 const MemoryStore = require("memorystore")(session);
 const User = require("./Schematics/User");
 const cors = require("cors");
-User.createStrategy();
+// User.createStrategy();
 
 dotenv.config();
 
@@ -48,6 +49,11 @@ app.use(
         secret: "dogs",
     })
 );
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+// passport.use(User.createStrategy());
 passport.use(
     new LocalStrategy((username, password, done) => {
         User.findOne({ username: username }, (err, user) => {
@@ -70,15 +76,15 @@ passport.use(
     })
 );
 
-passport.serializeUser(function (user, done) {
-    done(null, user.id);
-});
+// passport.serializeUser(function (user, done) {
+//     done(null, user.id);
+// });
 
-passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
-        done(err, user);
-    });
-});
+// passport.deserializeUser(function (id, done) {
+//     User.findById(id, function (err, user) {
+//         done(err, user);
+//     });
+// });
 
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user;

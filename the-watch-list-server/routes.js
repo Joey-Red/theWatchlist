@@ -82,6 +82,7 @@ router.delete("/delete-user", (req, res, next) => {
             }
         );
     }
+    res.json("Nice try!");
 });
 router.put("/update-movies", (req, res, next) => {
     User.findOneAndUpdate(
@@ -97,36 +98,26 @@ router.put("/update-movies", (req, res, next) => {
 });
 router.put("/update-password", function (req, res) {
     console.log(req.body);
-    User.findOne({ _id: req.body.user._id }, (err, foundUser) => {
+    User.findOne({ _id: req.body.user._id }, (err, user) => {
+        // console.log(user);
         // Check if error connecting
         if (err) {
             res.json({ success: false, message: err }); // Return error
         } else {
             // Check if user was found in database
-            if (!foundUser) {
+            if (!user) {
                 res.json({ success: false, message: "User not found" });
             } else {
-                // console.log(foundUser);
-                foundUser.changePassword(
-                    req.body.oldPw,
+                user.setPassword(
+                    //  req.body.oldPw,
                     req.body.newPw,
                     function (err) {
                         if (err) {
-                            if (err.name === "IncorrectPasswordError") {
-                                res.json({
-                                    success: false,
-                                    message: "Incorrect password",
-                                }); // Return error
-                            } else {
-                                res.json({
-                                    success: false,
-                                    message: "Something went wrong.",
-                                });
-                            }
+                            console.log(res.json(err));
                         } else {
-                            res.json({
-                                success: true,
-                                message: "Success",
+                            user.save();
+                            res.status(200).json({
+                                message: "password reset successful",
                             });
                         }
                     }
@@ -159,7 +150,7 @@ router.get("/user-list", (req, res) => {
             res.json(err);
         }
         res.json(result);
-    });
+    }).sort({ $natural: -1 });
 });
 router.get("/trending", (req, res) => {
     // MovieComment.find({ $query: {}, $orderby: { $dateAdded: -1 } }).limit(3),
@@ -332,11 +323,6 @@ router.post("/sign-up", (req, res, next) => {
                         if (err) {
                             return next(err);
                         }
-                        // res.redirect("/");
-                        // res.json(`${user} created!`);
-                        // res.json(req.body); //Pw & username
-                        // return res.json(req.body.username);
-                        // return res.json(req.user);
                         passport.authenticate("local")(req, res, function () {
                             // res.redirect("/");
                             res.json(req.user);
@@ -349,6 +335,13 @@ router.post("/sign-up", (req, res, next) => {
         }
     });
 });
+// router.post(
+//     "/log-in",
+//     passport.authenticate("local", { failureMessage: true }),
+//     function (req, res) {
+//         res.json(req.user);
+//     }
+// );
 router.post(
     "/log-in",
     passport.authenticate("local", { failureMessage: true }),
@@ -356,7 +349,6 @@ router.post(
         res.json(req.user);
     }
 );
-
 router.get("/log-out", (req, res) => {
     req.logout(function (err) {
         if (err) {

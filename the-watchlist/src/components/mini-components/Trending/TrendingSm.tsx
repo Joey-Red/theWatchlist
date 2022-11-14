@@ -15,7 +15,7 @@ function TrendingSm({ content }: TrendingSmProps) {
                 background: `url(${content.moviePoster}) `,
                 backgroundSize: "cover",
             }}
-            className="bg-slate-900/90 flex-col relative min-h-[143px] max-h-[540px] w-full sm:w-1/3 rounded sm:rounded-tr-[0px] sm:rounded-tl-[0px] flex bg-blue-200 "
+            className="bg-slate-900/90 flex-col relative min-h-[252px] max-h-[252px] w-full sm:w-1/3 rounded sm:rounded-tr-[0px] sm:rounded-tl-[0px] flex bg-blue-200 "
             onMouseEnter={() => setOpaque(true)}
             onMouseLeave={() => setOpaque(false)}
         >

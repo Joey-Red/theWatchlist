@@ -56,7 +56,7 @@ function SecondaryContent({ user, loggedIn }: SecondaryContentProps) {
             <div className="sm:w-[50%] rounded flex flex-col">
                 <div
                     // style={{ background: "rgba(0,0,0 / 100%)" }}
-                    className=" bg-slate-900/90  rounded"
+                    className=" bg-slate-900/90 rounded"
                     // style={{
                     //     background: `url(${theater}) center center no-repeat`,
                     //     backgroundSize: "cover",

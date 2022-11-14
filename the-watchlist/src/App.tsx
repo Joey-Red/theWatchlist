@@ -52,7 +52,7 @@ function App() {
     let [title, setTitle] = useState("");
     let [runTime, setRunTime] = useState("");
     let [disabledSearch, setDisabledSearch] = useState(false);
-
+    let [notFound, setNotFound] = useState(false);
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
@@ -72,9 +72,25 @@ function App() {
         >
             {displayData && (
                 <DisplayData
+                    setActors={setActors}
+                    setAwards={setAwards}
+                    setPlot={setPlot}
+                    setBoxOffice={setBoxOffice}
+                    setDirector={setDirector}
+                    setGenre={setGenre}
+                    setPoster={setPoster}
+                    setRating={setRating}
+                    setWriters={setWriters}
+                    setRelease={setRelease}
+                    setImdbRating={setImdbRating}
+                    setTitle={setTitle}
+                    setRunTime={setRunTime}
+                    setLoading={setLoading}
+                    setNotFound={setNotFound}
                     title={title}
                     loading={loading}
                     user={user}
+                    notFound={notFound}
                     setDisplayData={setDisplayData}
                     actors={actors}
                     awards={awards}
@@ -162,9 +178,10 @@ function App() {
                         setRunTime={setRunTime}
                         disabledSearch={disabledSearch}
                         setDisabledSearch={setDisabledSearch}
+                        setNotFound={setNotFound}
                     />{" "}
                     {mainContent && (
-                        <div className="flex flex-col h-full">
+                        <div className="flex flex-col">
                             <Routes>
                                 <Route
                                     path="/user:id"
